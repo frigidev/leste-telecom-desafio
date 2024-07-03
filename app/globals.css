@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+
+    --primary: 220.9 39.3% 11%;
+    --primary-foreground: 210 20% 98%;
+
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 71.4% 4.1%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+
+    --primary: 210 20% 98%;
+    --primary-foreground: 220.9 39.3% 11%;
+
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 216 12.2% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@media (max-width: 768px) { 
+  .gender-card {
+    width: 100%;
+  }
+}
+
+@media (min-width: 640px) { 
+  section.filters {
+    margin-left: 3%;
+  }
+
+  .w-input {
+    width: 95%;
+  }
+}
+
+@media (min-width: 768px) {
+  section.filters {
+    margin-left: 10%;
+  }
+
+  .w-input { 
+    width: 90%;
+  }
+}
+
+@media (min-width: 1024px) {
+  section.filters {
+    margin-left: 17%;
+  }
+
+  .w-input { 
+    width: 100%;
+  }
+}
+
+/*Custom Styles*/
+
+* {
+  font-family: 'Courier New', 'Helvetica', sans-sarif;
+}
+
+.leste {
+  color: #1A8F6E;
+  font-weight: 600;
+}
+
+.leste-bg {
+  background-color: #1A8F6E;
+}
+
+.filter-label {
+  color: #fff;
+  font-size: 0.8em;
+}
+
+.gender-card {
+  width: 250px;
+}
+
+.filters {
+  margin-top: 25px;
+}
+
+.icons {
+  margin-right: 0.5rem;
+}
+
+.w-input-form {
+  width:100%;
+  border-radius: 8px;
+}
+
+.w-input-filters {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.leste-contact-leste {
+  color: #1A8F6E;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  font-size: 1.75em;
+  padding-right: 2.5%;
+}
+
+.leste-contact-contact {
+  color: #1A8F6E;
+  font-weight: 500;
+  font-size: 1.75em;
+}
