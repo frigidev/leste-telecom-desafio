@@ -24,7 +24,7 @@ To install them, it is necessary to run the npms below:
 - **model**: Defines the data structure (Contact interface) used in the application.
 - **components**: Contains reusable React components that make up the user interface, such as forms, filters, statistical summaries, modal and list.
     - **page**: Contains contact's page component, where all reusable components are rendered.
-- **lib**: Utility function of ContactsAPI, that handles communication with the external API granted for the challenge.
+- **lib**: Utility function of ContactsAPI, that handles communication with the external API granted for the challenge. Data is persisted in localstorage.
 - **app**: Holds configuration files and application-specific components, including layout, app and globals.
 - **context**: Manages global application state using the ContactContext, simplifying the access and the data manipulation in different parts of the app.
 
@@ -75,7 +75,7 @@ Para instalá-las, é necessário rodar os npms abaixo:
 - **components**: Contém os componentes React reutilizáveis da interface 
 (formulário, filtros, sumários estatísticos, modal, listagem).
     - **page**: Contém o componente de página de contatos, onde todos os componentes são renderizados.
-- **lib**: Abriga função utilitária de ContactsAPI que lida com a comunicação com a API externa cedida no desafio.
+- **lib**: Abriga função utilitária de ContactsAPI que lida com a comunicação com a API externa cedida no desafio. Dados são persistidos no localstorage.
 - **app**: Contém arquivos de configuração/componentes específicos da aplicação, como layout, app e globals.
 - **context**: Gerencia o estado global da aplicação através do ContactContext, simplificando o acesso e a manipulação de dados em diferentes partes da aplicação.
 
