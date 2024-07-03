@@ -21,7 +21,7 @@ export default function ContactsPage() {
   const [searchTextBirthMonth, setSearchTextBirthMonth] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false); 
 
-  const { contacts, setContacts, creatingEditingContact, setCreatingEditingContact } = useContacts();
+  const { contacts, setContacts, creatingEditingContact, setCreatingEditingContact, isLoading } = useContacts();
 
   useEffect(() => {
     const fetchContacts = async () => {
@@ -60,8 +60,7 @@ export default function ContactsPage() {
         toast.success('Contact created successfully!'); 
       }
     } catch (error) {
-      console.error("Error submitting the form:", error);
-      toast.error('An error occurred while saving the contact.');
+      toast.error(`An error occurred while saving the contact. ${error}`);
     } finally {
       setIsModalOpen(false); 
     }
@@ -180,11 +179,15 @@ export default function ContactsPage() {
       </section>
 
       <section>
-        <ContactList 
-          filteredContacts={filteredContacts} 
-          onDeleteContact={handleDeleteContact} 
-          onCreateEditContact={handleCreateEditContact} 
-        />
+        {isLoading ? (
+          <p>Loading contacts...</p> 
+        ) : (
+          <ContactList 
+            filteredContacts={filteredContacts} 
+            onDeleteContact={handleDeleteContact} 
+            onCreateEditContact={handleCreateEditContact} 
+          />
+        )}
       </section>
 
       <ContactModal 
