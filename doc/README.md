@@ -10,7 +10,7 @@ This Contact List includes filters, forms, statistics and the list itself.
 
 ### Technologies and libraries used during development
 
-React with Next.js, Tailwind CSS, React Hot Toast, React Hook Form, Material-UI (MUI), Radix UI.
+React with Next.js, Tailwind CSS, React Hot Toast, React Hook Form, Material-UI (MUI), Radix UI, shadcn.
 
 To install them, it is necessary to run the npms below:
 
@@ -60,7 +60,7 @@ Essa lista de contatos contempla filtros, formulários, estatísticas, e a próp
 
 ### Tecnologias e bibliotecas utilizadas durante o desenvolvimento
 
-React with Next.js, Tailwind CSS, React Hot Toast, React Hook Form, Material-UI (MUI), Radix UI.
+React with Next.js, Tailwind CSS, React Hot Toast, React Hook Form, Material-UI (MUI), Radix UI, shadcn.
 
 Para instalá-las, é necessário rodar os npms abaixo:
 
