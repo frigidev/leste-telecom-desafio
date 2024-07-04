@@ -15,10 +15,11 @@ import Link from "next/link";
 
 export default function ContactsPage() {
   const [searchTextGender, setSearchTextGender] = useState("");
-  const [searchTextLanguage, setSearchTextLanguage] = useState("");
   const [searchTextAge, setSearchTextAge] = useState("");
   const [searchTextBirthMonth, setSearchTextBirthMonth] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchTextLanguage, setSearchTextLanguage] = useState("");
+  const [displayedContacts, setDisplayedContacts] = useState<Contact[]>([]); 
 
   const {
     contacts,
@@ -29,11 +30,40 @@ export default function ContactsPage() {
     deleteContact,
     setCreatingEditingContact,
     creatingEditingContact,
-  } = useContactStore(); 
+  } = useContactStore();
 
   React.useEffect(() => {
     fetchContacts();
   }, []);
+
+  React.useEffect(() => {
+    const filtered = contacts.filter((contact) => {
+      const currentDate = new Date();
+      const currentYear = currentDate.getFullYear();
+      const birthYear = new Date(contact.birthday).getFullYear();
+      const age = currentYear - birthYear;
+      const birthMonth = new Date(contact.birthday).getMonth() + 1;
+
+      const matchGender = searchTextGender === "" ||
+      contact.gender.toLowerCase().includes(searchTextGender.toLowerCase());
+
+      const matchLanguage =
+        !searchTextLanguage ||
+        contact.language
+          .toLowerCase()
+          .includes(searchTextLanguage.toLowerCase());
+
+      return (
+        matchGender &&
+        matchLanguage &&
+        (searchTextAge === "" || age === parseInt(searchTextAge)) &&
+        (searchTextBirthMonth === "" ||
+          birthMonth === parseInt(searchTextBirthMonth))
+      );
+    });
+
+    setDisplayedContacts(filtered); 
+  }, [contacts, searchTextGender, searchTextLanguage, searchTextAge, searchTextBirthMonth]);
 
   const handleSubmitContact = async (
     data: Contact,
@@ -76,35 +106,14 @@ export default function ContactsPage() {
     setIsModalOpen(true);
   };
 
-  const filteredContacts = contacts.filter((contact) => {
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const birthYear = new Date(contact.birthday).getFullYear();
-    const age = currentYear - birthYear;
-    const birthMonth = new Date(contact.birthday).getMonth() + 1;
-
-    const firstCharMatchFilter =
-      searchTextLanguage === "" ||
-      contact.language.toLowerCase().charAt(0) ===
-        searchTextLanguage.toLowerCase().charAt(0);
-
-    return (
-      contact.gender.toLowerCase().includes(searchTextGender.toLowerCase()) &&
-      firstCharMatchFilter &&
-      (searchTextAge === "" || age === parseInt(searchTextAge)) &&
-      (searchTextBirthMonth === "" ||
-        birthMonth === parseInt(searchTextBirthMonth))
-    );
-  });
-
   const genderCounts: { [key: string]: number } = {};
-  filteredContacts.forEach((contact) => {
+  displayedContacts.forEach((contact) => {
     const gender = contact.gender.toUpperCase();
     genderCounts[gender] = (genderCounts[gender] || 0) + 1;
   });
 
   const languageCounts: { [key: string]: number } = {};
-  filteredContacts.forEach((contact) => {
+  displayedContacts.forEach((contact) => {
     const language = contact.language;
     languageCounts[language] = (languageCounts[language] || 0) + 1;
   });
@@ -114,18 +123,17 @@ export default function ContactsPage() {
       case "gender":
         setSearchTextGender(value);
         break;
-      case "language":
-        setSearchTextLanguage(value);
-        break;
       case "age":
         setSearchTextAge(value);
         break;
       case "birthMonth":
         setSearchTextBirthMonth(value);
         break;
+        case "language":
+        setSearchTextLanguage(value);
+        break;
     }
   };
-
   const [showLanguageSummary, setLanguageOpen] = useState(false);
 
   return (
@@ -140,32 +148,29 @@ export default function ContactsPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <aside className="md:col-span-1 ml-10 mt-10">
+        <aside className="md:col-span-1 ml-10 mt-2">
           <h3 className="leste text-2xl font-bold mb-2">Gender Summary</h3>
           <GenderCount counts={genderCounts} />
         </aside>
 
         <div className="md:col-span-1 flex flex-col items-center ">
-          <h3 className="leste text-2xl font-bold mb-2">Contact Filters</h3>
+          <h3 className="leste text-2xl font-bold mb-2">
+            Contact Filters
+          </h3>
           <ContactFilters
             searchTextGender={searchTextGender}
-            searchTextLanguage={searchTextLanguage}
             searchTextAge={searchTextAge}
+            setSearchTextGender={setSearchTextGender}
             searchTextBirthMonth={searchTextBirthMonth}
+            searchTextLanguage={searchTextLanguage}
+            setSearchTextLanguage={setSearchTextLanguage}
             onSearchTextChange={handleSearchTextChange}
+            contacts={contacts}
           />
         </div>
 
         <aside className="md:col-span-1 flex flex-col items-start ml-20 mb-6">
-          <Button
-            onClick={() => {
-              setLanguageOpen(!showLanguageSummary);
-            }}
-            className="leste-bg mb-2"
-          >
-            Language Count
-          </Button>
-          {showLanguageSummary && <LanguageCount counts={languageCounts} />}
+          <LanguageCount counts={languageCounts} />
         </aside>
       </div>
 
@@ -186,7 +191,7 @@ export default function ContactsPage() {
           <p>Loading contacts...</p>
         ) : (
           <ContactList
-            filteredContacts={filteredContacts}
+            filteredContacts={displayedContacts}
             onDeleteContact={handleDeleteContact}
             onCreateEditContact={handleCreateEditContact}
           />

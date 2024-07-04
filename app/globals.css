@@ -75,36 +75,6 @@
   }
 }
 
-@media (min-width: 640px) { 
-  section.filters {
-    margin-left: 3%;
-  }
-
-  .w-input {
-    width: 95%;
-  }
-}
-
-@media (min-width: 768px) {
-  section.filters {
-    margin-left: 10%;
-  }
-
-  .w-input { 
-    width: 90%;
-  }
-}
-
-@media (min-width: 1024px) {
-  section.filters {
-    margin-left: 17%;
-  }
-
-  .w-input { 
-    width: 100%;
-  }
-}
-
 /*Custom Styles*/
 
 * {
@@ -142,7 +112,7 @@
   border-radius: 8px;
 }
 
-.w-input-filters {
+.w-select-filters {
   width: 100%;
   border-radius: 8px;
   margin-bottom: 8px;
