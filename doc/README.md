@@ -73,12 +73,6 @@ This application leverages the Zustand library for managing the global state of 
 
 The store utilizes Zustand's `persist` middleware to automatically persist the `contacts` state in localStorage. This ensures that the data is preserved across user sessions.
 
-### Tested Limitations
-
-#### Language Summary
-
-- There are only three columns displaying the languages, if there are more than 21 languages, they will not be displayed due to this ui  limitation.
-
 ## PT
 
 ### Introdução
@@ -152,9 +146,3 @@ Essa aplicação utiliza a biblioteca Zustand para gerenciar o estado global dos
 #### Persistência de Dados:
 
 A store utiliza o middleware `persist` do Zustand para persistir automaticamente o estado `contacts` no localStorage. Isso garante que os dados sejam preservados entre as sessões do usuário, sem chamadas desenecessárias à API.
-
-### Limitações Testadas
-
-#### Language Summary
-
-- Existem apenas três colunas exibindo as langauges, se existirem mais do que 21 languages, elas não vão ser exibidas na interface corretamente devido a essa limitação da ui.
