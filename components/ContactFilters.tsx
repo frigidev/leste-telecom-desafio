@@ -21,7 +21,7 @@ export const ContactFilters: React.FC<ContactFiltersProps> = ({
 
   return (
     <>
-        <InputLabel className="filter-label" htmlFor="contactGender">Contact Gender</InputLabel>
+        <InputLabel className="filter-label" htmlFor="contactGender">Contacts by Gender</InputLabel>
         <Mui.TextField
           className="leste-bg w-input-filters"
           type="text"
@@ -32,7 +32,7 @@ export const ContactFilters: React.FC<ContactFiltersProps> = ({
           onChange={(e) => onSearchTextChange('gender', e.target.value)}
         />
 
-        <InputLabel className="filter-label" htmlFor="contactLanguage">Contact Language</InputLabel>
+        <InputLabel className="filter-label" htmlFor="contactLanguage">Contacts by Language</InputLabel>
         <Mui.TextField
           className="leste-bg w-input-filters"
           type="text"
@@ -43,7 +43,7 @@ export const ContactFilters: React.FC<ContactFiltersProps> = ({
           onChange={(e) => onSearchTextChange('language', e.target.value)}
         />
 
-        <InputLabel className="filter-label" htmlFor="contactAge">Contact Age</InputLabel>
+        <InputLabel className="filter-label" htmlFor="contactAge">Contacts by Age</InputLabel>
         <Mui.TextField
           className="leste-bg w-input-filters"
           type="text"
@@ -54,7 +54,7 @@ export const ContactFilters: React.FC<ContactFiltersProps> = ({
           onChange={(e) => onSearchTextChange('age', e.target.value)}
         />
 
-        <InputLabel className="filter-label" htmlFor="contactBirthMonth">Contact Birth Month</InputLabel>
+        <InputLabel className="filter-label" htmlFor="contactBirthMonth">Contacts by Birth Month</InputLabel>
         <Mui.TextField
           className="leste-bg w-input-filters"
           type="text"
