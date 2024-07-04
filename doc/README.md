@@ -10,7 +10,7 @@ This Contact List includes filters, forms, statistics and the list itself.
 
 ### Technologies and libraries used during development
 
-React with Next.js, Tailwind CSS, React Hot Toast, React Hook Form, Material-UI (MUI), Radix UI, shadcn.
+React with Next.js, Tailwind CSS, React Hot Toast, React Hook Form, Material-UI (MUI), Radix UI, shadcn and zustand.
 
 To install them, it is necessary to run the npms below:
 
@@ -18,6 +18,7 @@ To install them, it is necessary to run the npms below:
 `npm i react-hook-form`
 `npm i @mui/material @emotion/react @emotion/styled`
 `npm i @radix-ui/react-primitive @radix-ui/react-slot`
+`npm i zustand`
 
 ### File Organization
 
@@ -26,7 +27,7 @@ To install them, it is necessary to run the npms below:
     - **page**: Contains contact's page component, where all reusable components are rendered.
 - **lib**: Utility function of ContactsAPI, that handles communication with the external API granted for the challenge. Data is persisted in localstorage.
 - **app**: Holds configuration files and application-specific components, including layout, app and globals.
-- **context**: Manages global application state using the ContactContext, simplifying the access and the data manipulation in different parts of the app.
+- **store**: Manages the global state of the app by the ContactStore, simplifying the access and the manipulation of data in different parts of the app, and optimizing the API consumption with the localstorage for the CRUD realization.
 
 ### Application Features
 
@@ -50,6 +51,28 @@ To install them, it is necessary to run the npms below:
 
 - ContactsList, GenderCount and LanguageCount: The GenderCount and LanguageCount are rendered in ContactsPage, displaying the total of contacts by gender and language.
 
+### State Management with Zustand
+
+This application leverages the Zustand library for managing the global state of contacts. The `ContactStore` is responsible for:
+
+- **Loading Contacts:** Fetching contacts from either the API or localStorage.
+- **Creating Contacts:** Adding new contacts to the list.
+- **Updating Contacts:** Modifying existing contacts.
+- **Deleting Contacts:** Removing contacts from the list.
+- **Managing Contact in Edit Mode:** Storing the contact currently being edited.
+
+#### Store Actions:
+
+- `fetchContacts()`: Retrieves the contacts, prioritizing localStorage and consulting the API only if localStorage is empty.
+- `createContact(contact: Contact)`: Adds a new contact to the list, generating a unique and sequential ID.
+- `updateContact(contact: Contact)`: Updates an existing contact in the list.
+- `deleteContact(id: number)`: Removes a contact from the list based on its ID.
+- `setCreatingEditingContact(contact: Contact | null)`: Sets the contact that is currently being edited.
+
+#### Data Persistence:
+
+The store utilizes Zustand's `persist` middleware to automatically persist the `contacts` state in localStorage. This ensures that the data is preserved across user sessions.
+
 ## PT
 
 ### Introdução
@@ -60,7 +83,7 @@ Essa lista de contatos contempla filtros, formulários, estatísticas, e a próp
 
 ### Tecnologias e bibliotecas utilizadas durante o desenvolvimento
 
-React with Next.js, Tailwind CSS, React Hot Toast, React Hook Form, Material-UI (MUI), Radix UI, shadcn.
+React with Next.js, Tailwind CSS, React Hot Toast, React Hook Form, Material-UI (MUI), Radix UI, shadcn and zustand.
 
 Para instalá-las, é necessário rodar os npms abaixo:
 
@@ -68,6 +91,7 @@ Para instalá-las, é necessário rodar os npms abaixo:
 `npm i react-hook-form`
 `npm i @mui/material @emotion/react @emotion/styled`
 `npm i @radix-ui/react-primitive @radix-ui/react-slot`
+`npm i zustand`
 
 ### Organização dos diretórios
 
@@ -77,7 +101,7 @@ Para instalá-las, é necessário rodar os npms abaixo:
     - **page**: Contém o componente de página de contatos, onde todos os componentes são renderizados.
 - **lib**: Abriga função utilitária de ContactsAPI que lida com a comunicação com a API externa cedida no desafio. Dados são persistidos no localstorage.
 - **app**: Contém arquivos de configuração/componentes específicos da aplicação, como layout, app e globals.
-- **context**: Gerencia o estado global da aplicação através do ContactContext, simplificando o acesso e a manipulação de dados em diferentes partes da aplicação.
+- **store**: Gerencia o estado global da aplicação através do ContactStore, simplificando o acesso e a manipulação de dados em diferentes partes da aplicação, e otimizando o consumo da API com o localstorage para a realização do CRUD.
 
 ### Funcionalidades da Aplicação
 
@@ -101,3 +125,24 @@ Para instalá-las, é necessário rodar os npms abaixo:
 
 - ContactsList, GenderCount e LanguageCount: Os resumos estatíscos de GenderCount e LanguageCount são renderizados no componente pai ContactsPage, exibindo o total de contatos por gender e language.
 
+### Gerenciamento de Estado com Zustand
+
+Essa aplicação utiliza a biblioteca Zustand para gerenciar o estado global dos contatos. A store `ContactStore` é responsável por:
+
+- **Carregar Contatos:** Buscar os contatos da API ou do localStorage.
+- **Criar Contatos:**  Adicionar novos contatos à lista.
+- **Atualizar Contatos:**  Modificar contatos existentes.
+- **Excluir Contatos:**  Remover contatos da lista.
+- **Gerenciar Contato em Edição:**  Armazenar o contato que está sendo editado no momento.
+
+#### Ações da Store:
+
+- `fetchContacts()`: Busca os contatos, priorizando o localStorage e consultando a API apenas se o localStorage estiver vazio.
+- `createContact(contact: Contact)`: Adiciona um novo contato à lista, gerando um ID único e sequencial.
+- `updateContact(contact: Contact)`: Atualiza um contato existente na lista.
+- `deleteContact(id: number)`: Remove um contato da lista com base no ID.
+- `setCreatingEditingContact(contact: Contact | null)`: Define o contato que está sendo editado.
+
+#### Persistência de Dados:
+
+A store utiliza o middleware `persist` do Zustand para persistir automaticamente o estado `contacts` no localStorage. Isso garante que os dados sejam preservados entre as sessões do usuário, sem chamadas desenecessárias à API.

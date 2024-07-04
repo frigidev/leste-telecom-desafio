@@ -3,12 +3,12 @@ import * as React from "react";
 import * as Mui from "@mui/material";
 import { Contact } from "@/model/Contact";
 import { ContactForm } from "./ContactForm";
+import { useContactStore } from "@/store/ContactStore";
 
 interface ContactModalProps {
   open: boolean;
   onClose: () => void;
   onSubmit: (data: Contact, avatar: string) => Promise<void>;
-  contact?: Contact | null;
   setIsModalOpen: (open: boolean) => void;
 }
 
@@ -26,9 +26,9 @@ const style = {
 export const ContactModal: React.FC<ContactModalProps> = ({ 
   open, 
   onClose, 
-  onSubmit, 
-  contact,
+  onSubmit,
 }) => {
+  const { creatingEditingContact } = useContactStore();
   return (
     <Mui.Modal open={open} onClose={onClose}>
       <Mui.Box
@@ -41,10 +41,10 @@ export const ContactModal: React.FC<ContactModalProps> = ({
         }}
       >
         <Mui.Typography className="leste" variant="h6" component="h2">
-          {contact ? "Update Contact" : "Create Contact"}
+          {creatingEditingContact ? "Update Contact" : "Create Contact"}
         </Mui.Typography>
         <ContactForm 
-          contact={contact} 
+          contact={creatingEditingContact} 
           onSubmit={onSubmit} 
           onCancel={onClose} 
         />

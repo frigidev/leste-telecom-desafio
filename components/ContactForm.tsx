@@ -5,6 +5,7 @@ import { useState } from "react";
 import { SubmitHandler, useForm, useController } from 'react-hook-form';
 import { Contact } from "@/model/Contact";
 import * as Mui from "@mui/material";
+import { useContactStore } from "@/store/ContactStore"; 
 
 interface ContactFormProps {
   contact?: Contact | null;
@@ -43,12 +44,6 @@ export const ContactForm: React.FC<ContactFormProps> = ({ contact, onSubmit, onC
     control: control,
     rules: { required: true },
   });
-
-  React.useEffect(() => {
-      if (!contact) { 
-          reset(); 
-      }
-  }, [contact]);
 
   return (
     <form onSubmit={handleSubmit(handleSubmitForm)}>

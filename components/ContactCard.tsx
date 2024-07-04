@@ -1,6 +1,5 @@
 import { Contact } from '@/model/Contact';
 import { Button } from './ui/button';
-import { useContacts } from "@/context/ContactContext";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -13,6 +12,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import TagFacesIcon from '@mui/icons-material/TagFaces';
 import FaceIcon from '@mui/icons-material/Face';
 import { format } from 'date-fns';
+import { useContactStore } from '@/store/ContactStore';
 
 
 export function ContactCard({
@@ -27,7 +27,7 @@ export function ContactCard({
   onDelete,
   onCreateEdit,
 }: Contact & { onDelete: (id: number) => void; onCreateEdit: (contact: Contact | null) => (void) }) {
-  const { setCreatingEditingContact } = useContacts();
+  const { setCreatingEditingContact } = useContactStore();
 
   return (
     <article className="dark:border-gray-500 group rounded-lg border border-transparent
@@ -63,7 +63,7 @@ export function ContactCard({
               }}
               className="bg-back hover:bg-back"
             >
-                <EditIcon className="leste" />
+              <EditIcon className="leste" />
             </Button>
             
             <Button
@@ -72,7 +72,7 @@ export function ContactCard({
               onClick={() => onDelete(id)}
               className="bg-back hover:bg-back"
             >
-                <DeleteIcon className="text-red-700" />
+              <DeleteIcon className="text-red-700" />
             </Button>
         </div>
     </article>
