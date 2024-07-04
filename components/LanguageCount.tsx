@@ -14,9 +14,10 @@ export function LanguageCount({ counts }: LanguageCountProps) {
     (a, b) => b[1] - a[1]
   );
 
-  const column1 = sortedLanguages.slice(0, 7);
-  const column2 = sortedLanguages.slice(7, 15);
-  const column3 = sortedLanguages.slice(15, 22);
+  const itemsPerColumn = Math.ceil(sortedLanguages.length / 3);
+  const column1 = sortedLanguages.slice(0, itemsPerColumn);
+  const column2 = sortedLanguages.slice(itemsPerColumn, itemsPerColumn * 2);
+  const column3 = sortedLanguages.slice(itemsPerColumn * 2);
 
   return (
     <>
